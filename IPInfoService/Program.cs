@@ -1,11 +1,21 @@
+using IPInfoService;
+using IPInfoService.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+string connection = builder.Configuration.GetConnectionString("IpInfoDb");
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<IIPInfoService, IpInfoService>();
 
 var app = builder.Build();
 

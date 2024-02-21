@@ -1,0 +1,6 @@
+@IPInfoService_HostAddress = http://localhost:5296
+
+GET {{IPInfoService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
